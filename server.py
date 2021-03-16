@@ -5,9 +5,8 @@ import select
 import random
 import sys
 
-bots = "Jon", "Frank", "Hanne", "Joakim"
-
-
+bots = ("Jon", "Frank", "Hanne", "Joakim")
+test = random.choices(bots)
 
 
 def broadcast_message(message):
@@ -40,7 +39,7 @@ SERVER_S.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 SERVER_S.bind((HOST, PORT))
 
 print("Listening..")
-SERVER_S.listen()
+SERVER_S.listen(4)
 
 CONNECTION_LIST.append(SERVER_S)
 print("Fredriks Server has started!")
@@ -58,6 +57,7 @@ while True:
             print("\r Chatbot ({0}, {1} connected!".format(ADDR[0], ADDR[1]))
             broadcast_message("Client ({0}:{1}) entered the room \n"
                               .format(ADDR[0], ADDR[1]).encode())
+
         else:
             try:
                 print("Her venter jeg på en melding")
@@ -73,7 +73,7 @@ while True:
             except Exception as msg:
                 print(type(msg).__name__, msg)
                 print("\rChatbot ({0}, {1} is disconnected \n".format(ADDR[0], ADDR[1]))
-                broadcast_message("\r Chatbot ({0}, {1} is offline\n"
+                broadcast_message("\r Chatbot ({0}, {1} is offline)\n"
                                   .format(ADDR[0], ADDR[1]).encode())
                 SOCK.close()
             # try:
