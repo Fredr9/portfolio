@@ -49,12 +49,24 @@ print("Frank: {}".format(frank(action)))
 print("Hanne: {}".format(hanne(action)[0]))
 print("Joakim: {}".format(joakim(action)))
 
+
 if len(sys.argv) != 4:
     print("You need to have script, host, port, bot")
     sys.exit()
 else:
-    if(sys.argv[3]) != ["Jon", "Frank", "Hanne", "Joakim"]:
-        print(" You have too write one of the name of the bots!")
+    bot_name = str(sys.argv[3])
+    print(bot_name)
+    if (bot_name) in ("Jon, Frank, Hanne, Joakim"):  # sys.argv[3]) == (["Jon", "Frank", "Hanne", "Joakim"]):
+        print(" DU har nå logget inn!")
+
+    if (bot_name) not in ("Jon", "Frank", "Hanne", "Joakim"):
+        print(" You have too write the name of one of the bots!")
+        sys.exit()
+
+    else:
+        if (sys.argv[3]) == (["Jon", "Frank", "Hanne", "Joakim"]):
+            print(" DU har nå logget inn!")
+
 # if len(sys.argv) < 3:
 #    print("Usage :  python {0} hostname port".format(sys.argv[0]))
 #    sys.exit()
@@ -62,7 +74,6 @@ else:
 host = sys.argv[1]
 port = int(sys.argv[2])
 bot = sys.argv[3]
-
 
 socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 socket.settimeout(200)
