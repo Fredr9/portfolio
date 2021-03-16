@@ -2,6 +2,12 @@
 
 import socket
 import select
+import random
+import sys
+
+bots = "Jon", "Frank", "Hanne", "Joakim"
+
+
 
 
 def broadcast_message(message):
@@ -27,6 +33,7 @@ CONNECTION_LIST = []
 RECV_BUFFER = 4096
 HOST = 'localhost'
 PORT = 1990
+BOT = str(sys.argv[0])
 
 SERVER_S = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 SERVER_S.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -62,17 +69,18 @@ while True:
                     message = "\r[{}:{}]: {}".format(ADDR[0], ADDR[1], DATA.decode())
                     print(message, end="")
                     broadcast_message(message.encode())
+
             except Exception as msg:
                 print(type(msg).__name__, msg)
                 print("\rChatbot ({0}, {1} is disconnected \n".format(ADDR[0], ADDR[1]))
                 broadcast_message("\r Chatbot ({0}, {1} is offline\n"
                                   .format(ADDR[0], ADDR[1]).encode())
                 SOCK.close()
-            #try:
-             #   print("Nå fjerner jeg socket")
-                #CONNECTION_LIST.remove(SOCK)
-            #except ValueError as msg:
-             #   print("{}:{}".format(type(msg).__name__, msg))
+            # try:
+            #   print("Nå fjerner jeg socket")
+            # CONNECTION_LIST.remove(SOCK)
+            # except ValueError as msg:
+            #   print("{}:{}".format(type(msg).__name__, msg))
             continue
 
-SERVER_S.close()
+            SERVER_S.close()

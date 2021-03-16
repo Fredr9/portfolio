@@ -5,13 +5,50 @@ import select
 import sys
 import random
 
-#if len(sys.argv) < 3:
+bots = "Jon", "Frank", "Hanne", "Joakim"
+
+
+def bot(action, alt_action=None):
+    return "I think {} sounds great!".format(action + "ing"), None
+
+
+def jon(a, b=None):
+    return "I thin {} sounds fantastic!".format(a + "ing")
+
+
+def frank(a, b=None):
+    if b is None:
+        return "Not sure about {}. Can i get a Choice?".format(a + "ing")
+    return "Of course, both {} and {} seems ok to me".format(a, b + "ing")
+
+
+def hanne(a, b=None):
+    alternatives = ["walking", "talking", "swimming", "shopping"]
+    b = random.choices(alternatives)
+    res = "Yes, {} is a good options, but we can try som {}".format(a, b)
+    return res, b
+
+
+def joakim(a, b=None):
+    action = a + "ing"
+    bad_things = ["hitting", "screaming", "yelling", "complaining"]
+    good_things = ["singing", "running", "working", "playing"]
+
+    if action in bad_things:
+        return "YESS! Its {} time!".format(action)
+    elif action in good_things:
+        return "Wait what!? this suggestion sucks, {} is not a good idea".format(action)
+    return "I don't care!"
+
+
+# if len(sys.argv) < 3:
 #    print("Usage :  python {0} hostname port".format(sys.argv[0]))
 #    sys.exit()
 
-host = '' #sys.argv[1]
-port = 1990 #int(sys.argv[2])
-#bot = input()
+host = ''  # sys.argv[1]
+port = 1990  # int(sys.argv[2])
+# bot = input()
+
 
 socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 socket.settimeout(200)
@@ -32,6 +69,7 @@ while True:
     for sock in READ_SOCKETS:
         if sock == socket:
             data = sock.recv(8192)
+
             if not data:
                 print('\n Disconnected from server')
                 sys.exit()
