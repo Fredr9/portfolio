@@ -25,7 +25,7 @@ def frank(a, b=None):
 def hanne(a, b=None):
     alternatives = ["walking", "talking", "swimming", "shopping"]
     b = random.choices(alternatives)
-    res = "Yes, {} is a good options, but we can try som {}".format(a, b)
+    res = "Yes, {} is a good options, but we can try some {}".format(a, b)
     return res, b
 
 

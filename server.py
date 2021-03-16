@@ -16,6 +16,7 @@ def broadcast_message(message):
         if sockets != SERVER_S:
             try:
                 print("Etter Try")
+                print("Lengeden på CONNECTION_LIST ER " + str(len(CONNECTION_LIST)))
                 sockets.sendall(message)
             except Exception as msg:
                 print(type(msg).__name__)
@@ -45,14 +46,16 @@ CONNECTION_LIST.append(SERVER_S)
 print("Fredriks Server has started!")
 
 while True:
+
     READ_SOCKETS, WRITE_SOCKETS, ERROR_SOCKETS = select.select(CONNECTION_LIST, [], [])
     for SOCK in READ_SOCKETS:
         if SOCK == SERVER_S:
             SOCKFD, ADDR = SERVER_S.accept()
             CONNECTION_LIST.append(SOCKFD)
+
             if len(CONNECTION_LIST) == 3:
                 print("Nå er alle tilkoblet PARTY")
-
+                print("Lengeden på CONNECTION_LIST ER " + str(len(CONNECTION_LIST)))
                 broadcast_message("FÅR ALLE MELDINGEN?".encode())
             print("\r Chatbot ({0}, {1} connected!".format(ADDR[0], ADDR[1]))
             broadcast_message("Client ({0}:{1}) entered the room \n"
@@ -63,6 +66,7 @@ while True:
                 print("Her venter jeg på en melding")
                 DATA = SOCK.recv(RECV_BUFFER)
                 print("Nå skal meldingen ha kommet " + DATA.decode())
+
                 if DATA:
                     ADDR = SOCK.getpeername()
 
