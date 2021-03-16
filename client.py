@@ -13,7 +13,7 @@ def bot(action, alt_action=None):
 
 
 def jon(a, b=None):
-    return "I thin {} sounds fantastic!".format(a + "ing")
+    return "I think {} sounds fantastic!".format(a + "ing")
 
 
 def frank(a, b=None):
@@ -41,20 +41,42 @@ def joakim(a, b=None):
     return "I don't care!"
 
 
+action = random.choice(["sing", "test", "box", "try", "talk"])
+
+print("\nMe: Do you guys wanna {}? \n".format(action))
+print("Jon: {}".format(jon(action)))
+print("Frank: {}".format(frank(action)))
+print("Hanne: {}".format(hanne(action)[0]))
+print("Joakim: {}".format(joakim(action)))
+
+if len(sys.argv) != 4:
+    print("You need to have script, host, port, bot")
+    sys.exit()
+else:
+    if(sys.argv[3]) != ["Jon", "Frank", "Hanne", "Joakim"]:
+        print(" You have too write one of the name of the bots!")
 # if len(sys.argv) < 3:
 #    print("Usage :  python {0} hostname port".format(sys.argv[0]))
 #    sys.exit()
 
-host = ''  # sys.argv[1]
-port = 1990  # int(sys.argv[2])
-# bot = input()
+host = sys.argv[1]
+port = int(sys.argv[2])
+bot = sys.argv[3]
 
 
 socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 socket.settimeout(200)
 
+# botname = sys.argv[3]
+
+# melding = "hallo"
+# meldingTilServer = botname + ": " + melding
+
+# socket.send(meldingTilServer.encode())
+
 try:
     socket.connect((host, port))
+#   socket.send(input())
 except Exception as msg:
     print(type(msg).__name__)
     print("Cannot connect")
