@@ -5,7 +5,7 @@ import select
 import sys
 import random
 
-bots = "Jon", "Frank", "Hanne", "Joakim"
+bots_list = "Jon", "Frank", "Hanne", "Joakim"
 
 
 def bot(action, alt_action=None):
