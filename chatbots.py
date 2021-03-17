@@ -64,6 +64,9 @@ class Hanne(ChatBot):
 
     def add_random_actions(self):
         self.ACTIONS.update({'greetings': random.choice(self.Greetings)})
+        self.ACTIONS.update({'hello': random.choice(self.Greetings)})
+        self.ACTIONS.update({'hey': random.choice(self.Greetings)})
+        self.ACTIONS.update({'hi': random.choice(self.Greetings)})
 
 
 class Jon(ChatBot):
@@ -87,6 +90,32 @@ class Jon(ChatBot):
 
     def __init__(self):
         super().__init__('Jon')
+
+    def add_random_actions(self):
+        self.ACTIONS.update({'greetings': random.choice(self.Greetings)})
+
+
+class Joakim(ChatBot):
+    Greetings = [
+        "Helloi"
+        "Hi you!"
+        "How nice to see you!"
+    ]
+
+    ACTIONS = {
+        None: "I have no response for that =( Try something else please!",
+
+        'sing': "its awesome! I love to sing!",
+        'test': "is cool, maybe you can teach me!",
+        'box':  "thats scary, i dont want that!",
+        'try': "I like to always try my best!",
+        'talk': "I am always open to talk!",
+        'who': "I am Jon, the kind giant!"
+
+    }
+
+    def __init__(self):
+        super().__init__('Joakim')
 
     def add_random_actions(self):
         self.ACTIONS.update({'greetings': random.choice(self.Greetings)})

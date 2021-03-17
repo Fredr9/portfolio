@@ -54,6 +54,7 @@ def listen_data(cli):
         except ConnectionAbortedError:
             break
 
+
 def input_from_host():
     while True:
         message = input("")
