@@ -4,9 +4,16 @@ import socket
 import select
 import random
 import sys
+from threading import Thread
+from socketserver import ThreadingMixIn
 
 bots = ("Jon", "Frank", "Hanne", "Joakim")
 test = random.choices(bots)
+
+
+TCP_IP = '0.0.0.0'
+TCP_PORT = 2021
+BUFFER_SIZE = 1024
 
 
 def broadcast_message(message):
@@ -29,6 +36,7 @@ def broadcast_message(message):
                     print("{}:{}".format(type(msg).__name__, msg))
 
 
+
 CONNECTION_LIST = []
 RECV_BUFFER = 4096
 HOST = 'localhost'
@@ -38,15 +46,18 @@ BOT = str(sys.argv[0])
 SERVER_S = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 SERVER_S.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 SERVER_S.bind((HOST, PORT))
-
+threads = []
+'''
 print("Listening..")
 SERVER_S.listen(4)
-
+'''
 CONNECTION_LIST.append(SERVER_S)
 print("Fredriks Server has started!")
 
 while True:
 
+    print("Listening..")
+    SERVER_S.listen(4)
     READ_SOCKETS, WRITE_SOCKETS, ERROR_SOCKETS = select.select(CONNECTION_LIST, [], [])
     for SOCK in READ_SOCKETS:
         if SOCK == SERVER_S:

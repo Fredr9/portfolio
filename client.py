@@ -43,11 +43,11 @@ def joakim(a, b=None):
 
 action = random.choice(["sing", "test", "box", "try", "talk"])
 
-print("\nMe: Do you guys wanna {}? \n".format(action))
-print("Jon: {}".format(jon(action)))
-print("Frank: {}".format(frank(action)))
-print("Hanne: {}".format(hanne(action)[0]))
-print("Joakim: {}".format(joakim(action)))
+#print("\nMe: Do you guys wanna {}? \n".format(action))
+#print("Jon: {}".format(jon(action)))
+#print("Frank: {}".format(frank(action)))
+#print("Hanne: {}".format(hanne(action)[0]))
+#print("Joakim: {}".format(joakim(action)))
 
 
 if len(sys.argv) != 4:
@@ -66,6 +66,17 @@ else:
     else:
         if (sys.argv[3]) == (["Jon", "Frank", "Hanne", "Joakim"]):
             print(" DU har nå logget inn!")
+            print("\nMe: Do you guys wanna {}? \n".format(action))
+        if (bot_name) == ("Jon"):
+            print("Jon: {}".format(jon(action)))
+        if (bot_name) == ("Frank"):
+            print("Frank: {}".format(frank(action)))
+        if (bot_name) == ("Hanne"):
+            print("Hanne: {}".format(hanne(action)[0]))
+        if (bot_name) == ("Joakim"):
+            print("Joakim: {}".format(joakim(action)))
+
+
 
 # if len(sys.argv) < 3:
 #    print("Usage :  python {0} hostname port".format(sys.argv[0]))
