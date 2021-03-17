@@ -10,7 +10,6 @@ from socketserver import ThreadingMixIn
 bots = ("Jon", "Frank", "Hanne", "Joakim")
 test = random.choices(bots)
 
-
 TCP_IP = '0.0.0.0'
 TCP_PORT = 2021
 BUFFER_SIZE = 1024
@@ -34,7 +33,6 @@ def broadcast_message(message):
                     CONNECTION_LIST.remove(sockets)
                 except ValueError as msg:
                     print("{}:{}".format(type(msg).__name__, msg))
-
 
 
 CONNECTION_LIST = []
@@ -61,6 +59,7 @@ while True:
     READ_SOCKETS, WRITE_SOCKETS, ERROR_SOCKETS = select.select(CONNECTION_LIST, [], [])
     for SOCK in READ_SOCKETS:
         if SOCK == SERVER_S:
+
             SOCKFD, ADDR = SERVER_S.accept()
             CONNECTION_LIST.append(SOCKFD)
 
@@ -69,6 +68,7 @@ while True:
                 print("Lengeden på CONNECTION_LIST ER " + str(len(CONNECTION_LIST)))
                 broadcast_message("FÅR ALLE MELDINGEN?".encode())
             print("\r Chatbot ({0}, {1} connected!".format(ADDR[0], ADDR[1]))
+
             broadcast_message("Client ({0}:{1}) entered the room \n"
                               .format(ADDR[0], ADDR[1]).encode())
 
@@ -76,8 +76,9 @@ while True:
             try:
                 print("Her venter jeg på en melding")
                 DATA = SOCK.recv(RECV_BUFFER)
-                print("Nå skal meldingen ha kommet " + DATA.decode())
 
+                print("Nå skal meldingen ha kommet " + DATA.decode())
+                continue
                 if DATA:
                     ADDR = SOCK.getpeername()
 

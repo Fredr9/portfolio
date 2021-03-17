@@ -58,6 +58,7 @@ else:
     print(bot_name)
     if (bot_name) in ("Jon, Frank, Hanne, Joakim"):  # sys.argv[3]) == (["Jon", "Frank", "Hanne", "Joakim"]):
         print(" DU har nå logget inn!")
+        print("\nMe: Do you guys wanna {}? \n".format(action))
 
     if (bot_name) not in ("Jon", "Frank", "Hanne", "Joakim"):
         print(" You have too write the name of one of the bots!")
